@@ -13,11 +13,11 @@ app.use(express.json());
 app.use(cors());
 
 // Option 2: Allow Custom Origins
-app.use(cors({
-    origin: "https://mern-vercel-azure-two.vercel.app/",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-}))
+// app.use(cors({
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type"],
+// }))
 
 app.get("/", (request, response) => {
     console.log(request)
