@@ -49,43 +49,50 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl my-4">Edit Profile</h1>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Name</label>
-          <input
-            required
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
+    <div className="p-4 h-auto bg-stone-700">
+      <div className="bg-teal-700">
+        <h1 className="text-3xl text-white font-header p-10 text-center">
+          Edit Profile
+        </h1>
+        {loading ? <Spinner /> : ""}
+        <div className="wrapper-form flex flex-col rounded-xl w-[600px] p-4 mx-auto">
+          <div className="my-4">
+            <label className="text-xl mr-4 text-white">Name</label>
+            <input
+              required
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="border-2 border-white px-4 py-2 w-full"
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-white">Title</label>
+            <input
+              required
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2  w-full "
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-white">Skill</label>
+            <input
+              required
+              type="text"
+              value={skill}
+              onChange={(e) => setSkill(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full "
+            />
+          </div>
+          <button
+            className="p-2 bg-stone-700 text-white font-header hover:bg-stone-400 hover:text-black cursor-pointer m-8"
+            onClick={handleEditProfile}
+          >
+            Save
+          </button>
         </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Title</label>
-          <input
-            required
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Skill</label>
-          <input
-            required
-            type="text"
-            value={skill}
-            onChange={(e) => setSkill(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full "
-          />
-        </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleEditProfile}>
-          Save
-        </button>
       </div>
     </div>
   );
