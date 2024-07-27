@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const ProfileCard = ({ name, title, skill, _id }) => {
   return (
@@ -15,12 +16,12 @@ const ProfileCard = ({ name, title, skill, _id }) => {
         </span>
       </div>
       <div className="absolute flex gap-2 bottom-3 right-3">
-        <a href={`/profiles/edit/${_id}`}>
+        <Link to={`/profiles/edit/${_id}`}>
           <FaEdit className="text-xl" />
-        </a>
-        <a href={`/profiles/delete/${_id}`}>
+        </Link>
+        <Link to={`/profiles/delete/${_id}`}>
           <RiDeleteBin5Line className="text-xl" />
-        </a>
+        </Link>
       </div>
     </div>
   );
