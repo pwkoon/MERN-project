@@ -9,15 +9,15 @@ const app = express();
 // Middleware for parsing request body
 app.use(express.json());
 
-//Option 1: Allow all orifins with default of cors(*)
+//Option 1: Allow all origins with default of cors(*)
 app.use(cors());
 
-//Option 2: Allow Custom Origins
-// app.use(cors({
-//     origin: "http://localhost:3000",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Type"],
-// }))
+// Option 2: Allow Custom Origins
+app.use(cors({
+    origin: "https://mern-vercel-azure-two.vercel.app/",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+}))
 
 app.get("/", (request, response) => {
     console.log(request)
