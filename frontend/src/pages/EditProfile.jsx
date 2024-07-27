@@ -14,7 +14,7 @@ const EditProfile = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/profiles/${id}`)
+      .get(`https://mern-project-api-green.vercel.app/profiles/${id}`)
       .then((response) => {
         setName(response.data.name);
         setSkill(response.data.skill);
@@ -36,7 +36,7 @@ const EditProfile = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/profiles/${id}`, data)
+      .put(`https://mern-project-api-green.vercel.app/profiles/${id}`, data)
       .then(() => {
         setLoading(false);
         navigate("/profiles");

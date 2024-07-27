@@ -11,7 +11,7 @@ const ShowProfile = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/profiles")
+      .get("https://mern-project-api-green.vercel.app/profiles")
       .then((response) => {
         setProfiles(response.data);
         console.log(profiles);

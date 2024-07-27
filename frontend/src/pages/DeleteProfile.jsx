@@ -13,7 +13,7 @@ const DeleteProfile = () => {
   const handleDeleteProfile = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/profiles/${id}`)
+      .delete(`https://mern-project-api-green.vercel.app/profiles/${id}`)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Profile Deleted successfully", { variant: "success" });

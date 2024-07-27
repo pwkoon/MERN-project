@@ -25,7 +25,7 @@ const CreateProfile = () => {
     };
     // setLoading(true);
     axios
-      .post("http://localhost:5555/profiles", data)
+      .post("https://mern-project-api-green.vercel.app/profiles", data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book Created successfully", { variant: "success" });
