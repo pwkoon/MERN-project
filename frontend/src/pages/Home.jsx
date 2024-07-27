@@ -1,4 +1,5 @@
 import CreateProfile from "./CreateProfile";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
             <a className="bg-black p-2 font-bold text-white" href="/profiles">
               Show All
             </a>
+            <Link to="/profiles">Show All 2</Link>
             <a className="bg-black p-2 font-bold text-white" href="#form">
               Create One
             </a>
