@@ -24,6 +24,14 @@ app.get("/", (request, response) => {
     return response.status(234).send("Welcome to Code Cave")
 });
 
+// Serve static files from the Vite build directory
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to serve index.html for all paths
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 app.use("/profiles", profilesRoute);
 
 mongoose.connect(mongDBURL).then(() => {

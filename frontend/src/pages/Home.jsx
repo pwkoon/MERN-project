@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import CreateProfile from "./CreateProfile";
 
 const Home = () => {
@@ -12,10 +11,7 @@ const Home = () => {
             Where Logic Meets Imagination
           </p>
           <div className="flex gap-2 justify-center">
-            <a
-              className="bg-black p-2 font-bold text-white"
-              href="https://mern-vercel-azure-two.vercel.app/profiles"
-            >
+            <a className="bg-black p-2 font-bold text-white" href="/profiles">
               Show All
             </a>
             <a className="bg-black p-2 font-bold text-white" href="#form">
