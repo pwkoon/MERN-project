@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import Spinner from "../ components/Spinner";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ const CreateProfile = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  const latestProfile = useRef("");
 
   const handleSaveProfile = () => {
     if (!name || !title || !skill) {
@@ -29,6 +31,11 @@ const CreateProfile = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book Created successfully", { variant: "success" });
+        latestProfile.current = data.name;
+        enqueueSnackbar(
+          `${latestProfile.current} just adding in ${new Date()}`,
+          { variant: "success" }
+        );
         navigate("/profiles");
       })
       .catch((error) => {
@@ -40,49 +47,51 @@ const CreateProfile = () => {
   };
 
   return (
-    <div className="p-4 bg-black">
-      <h1 className="text-3xl font-header text-white text-center my-4">
-        3 key details to craft your profile
-      </h1>
-      {loading ? <Spinner /> : ""}
-      <div className="wrapper-form flex flex-col border-2 border-yellow-400 rounded-xl w-[600px] p-4 mx-auto animate-wiggle">
-        <div className="my-4">
-          <label className="text-xl mr-4 text-white">Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-white">Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-white">Skill</label>
-          <input
-            type="text"
-            value={skill}
-            onChange={(e) => setSkill(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        {error && (
-          <div className="mx-auto bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-            {error}
+    <>
+      <div className="p-4 bg-black">
+        <h1 className="text-3xl font-header text-white text-center my-4">
+          3 key details to craft your profile
+        </h1>
+        {loading ? <Spinner /> : ""}
+        <div className="wrapper-form flex flex-col border-2 border-yellow-400 rounded-xl w-[600px] p-4 mx-auto animate-wiggle">
+          <div className="my-4">
+            <label className="text-xl mr-4 text-white">Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+            />
           </div>
-        )}
-        <button className="p-2 bg-yellow-400 m-8" onClick={handleSaveProfile}>
-          Save
-        </button>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-white">Title</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-white">Skill</label>
+            <input
+              type="text"
+              value={skill}
+              onChange={(e) => setSkill(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+            />
+          </div>
+          {error && (
+            <div className="mx-auto bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+              {error}
+            </div>
+          )}
+          <button className="p-2 bg-yellow-400 m-8" onClick={handleSaveProfile}>
+            Save
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

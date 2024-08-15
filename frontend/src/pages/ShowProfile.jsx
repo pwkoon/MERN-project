@@ -1,32 +1,76 @@
+import { useEffect, useReducer } from "react";
 import Spinner from "../ components/Spinner";
 import ProfileCard from "../ components/ProfileCard";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import BackButton from "../ components/BackButton";
+import { useTheme } from "../ThemeContext";
+
+const ACTIONS = {
+  CALL_API: "call-api",
+  SUCCESS: "success",
+  ERROR: "error",
+};
+
+const profileReducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.CALL_API: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case ACTIONS.SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        profiles: action.data,
+      };
+    }
+    case ACTIONS.ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    }
+  }
+};
+
+const initialState = {
+  profiles: [],
+  loading: false,
+  error: null,
+};
 
 const ShowProfile = () => {
-  const [profiles, setProfiles] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const darkTheme = useTheme();
+  // const [profiles, setProfiles] = useState([]);
+  // const [loading, setLoading] = useState(false);
+
+  //using useReducer to control complex state
+  const [state, dispatch] = useReducer(profileReducer, initialState);
+  const { profiles, loading } = state;
 
   useEffect(() => {
-    setLoading(true);
+    dispatch({ type: ACTIONS.CALL_API });
     axios
       .get("https://mern-project-api-green.vercel.app/profiles")
       .then((response) => {
-        setProfiles(response.data);
-        console.log(profiles);
-        setLoading(false);
+        dispatch({ type: ACTIONS.SUCCESS, data: response.data });
       })
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
+        dispatch({ type: ACTIONS.ERROR, error: error });
       });
   }, []);
 
   return (
     <>
       <BackButton />
-      <div className="bg-emerald-600 flex-row lg:flex justify-center items-center ">
+      <div
+        className={`${
+          darkTheme ? "bg-emerald-300" : "bg-emerald-600"
+        } flex-row lg:flex justify-center items-center`}
+      >
         {profiles.length > 0 ? (
           <div className="p-10 flex justify-center items-center">
             <img src="/subhead-logo.png" width={450} alt="sub-header logo" />

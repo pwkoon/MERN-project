@@ -1,7 +1,17 @@
 import PropTypes from "prop-types";
+import { useThemeToggle } from "../ThemeContext";
 
 const Layout = ({ children }) => {
-  return <div className="body-wrapper">{children}</div>;
+  const toggleTheme = useThemeToggle();
+
+  return (
+    <>
+      <div className="body-wrapper">
+        <button onClick={toggleTheme}>Toggle theme</button>
+        {children}
+      </div>
+    </>
+  );
 };
 
 Layout.propTypes = {
