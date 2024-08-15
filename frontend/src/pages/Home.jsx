@@ -1,8 +1,18 @@
 import CreateProfile from "./CreateProfile";
+import { useTheme } from "../ThemeContext";
+import Skill from "../ components/Skill";
+
 const Home = () => {
+  const darkTheme = useTheme();
+
   return (
     <>
-      <div className="bg-banner bg-center bg-cover h-screen flex justify-center items-center">
+      <div
+        className={`${
+          darkTheme ? "bg-banner2" : "bg-banner"
+        } bg-center bg-cover h-screen flex justify-center items-center`}
+        // className="bg-banner bg-center bg-cover h-screen flex justify-center items-center"
+      >
         <div className="wrapper-header">
           <p className="text-8xl text-white font-bold font-header">Code Cave</p>
           <hr />
@@ -22,6 +32,7 @@ const Home = () => {
       <div id="form">
         <CreateProfile />
       </div>
+      <Skill />
     </>
   );
 };
